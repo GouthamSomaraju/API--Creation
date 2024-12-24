@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin page</title>
+    <!-- <style>
+          /* General Body Styling */
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Main Container */
+        .main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        /* Form Containers */
+        #post, #put, #delete {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #post:hover, #put:hover, #delete:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border: 1px solid #2980b9;
+            outline: none;
+        }
+
+        /* Buttons */
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .main {
+                padding: 0.5rem;
+            }
+        }
+    </style> -->
+
+    <style>
+        /* General Body Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text for contrast */
+        }
+
+        /* Main Container */
+        .main {
+            max-width: 900px; /* Reduced overall width */
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        /* Form Containers */
+        #post, #put, #delete {
+            background-color: #222; /* Dark gray background for contrast */
+            border: 1px solid #444; /* Slight border for distinction */
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            width: 80%; /* Reduced width */
+            margin: 0 auto; /* Centered horizontally */
+            transition: all 0.3s ease-in-out;
+        }
+
+        #post:hover, #put:hover, #delete:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        h1 {
+            color: #f8f8f8;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #555;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 0.9rem;
+            background-color: #333;
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border: 1px solid #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.8);
+        }
+
+        /* Buttons */
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Placeholder Color */
+        input::placeholder {
+            color: #aaa;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .main {
+                width: 95%;
+                padding: 0.5rem;
+            }
+            #post, #put, #delete {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        
+        <div id="post">
+            <h1>POST Data (Add Data)</h1>
+        <input type="text"  id="name" placeholder="Enter Name">
+        <input type="number" id="price" placeholder="Enter price">
+        <input type="text" id="description" placeholder="Enter category">
+        <input type="text" id="image" placeholder="Paste Image Link">
+        <button id="Submit" onclick="postapidata()">Submit</button>
+    </div>
+    
+    <div id="put">
+        <h1>PUT Data (Modify Existing Data)</h1>
+        <input type="text"  id="id1" placeholder="Enter id">
+        <input type="text"  id="name1" placeholder="Enter Name">
+        <input type="number" id="price1" placeholder="Enter price">
+        <input type="text" id="description1" placeholder="Enter category">
+        <input type="text" id="image1" placeholder="Paste Image Link">
+        <button id="Submit1" onclick="putData()">Submit</button>
+    </div>
+    
+    <div id="delete">
+        <h1>DELETE Data (Removing Data)</h1>
+        <input type="text" id="id2" placeholder="Enter id number">
+        <button id="Submit1" onclick="deleteData()">Delete</button>
+        
+
+    </div>
+</div>
+    <script>
+        // Script For POST DATA
+        async function postapidata() {
+
+        let ipName=document.getElementById("name")
+        let ipPrice=document.getElementById("price")
+        let ipDesc=document.getElementById("description")
+        let ipImg=document.getElementById("image")
+
+       
+
+        let obj={
+            name:ipName.value,
+            price:ipPrice.value,
+            description:ipDesc.value,
+            image:ipImg.value
+
+        }
+            let res=await fetch("http://localhost:3000/Products",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(obj)
+
+            })
+        }
+
+        // Script for PUT DATA
+        async function putData() {
+
+        let ipid1=document.getElementById("id1")
+        let ipName1=document.getElementById("name1").value
+        let ipPrice1=document.getElementById("price1").value
+        let ipDesc1=document.getElementById("description1").value
+        let ipImg1=document.getElementById("image1").value
+
+       
+
+        let obj1={
+            name:ipName1,
+            price:ipPrice1,
+            description:ipDesc1,
+            image:ipImg1
+
+        }
+            let res=await fetch(`http://localhost:3000/Products/${ipid1.value}`,{
+                method:"PUT",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(obj1)
+            })
+        }
+
+        // Script for Delete
+        
+        async function deleteData() {
+            let ipid2=document.getElementById("id2")
+            let res=await fetch(`http://localhost:3000/Products/${ipid2.value}`,{
+                method:"DELETE",
+                headers:{
+                    "Content-Type":"application/json"
+                }
+            })
+        }
+
+    </script>
+</body>
+</html>
